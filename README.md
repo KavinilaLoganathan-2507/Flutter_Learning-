@@ -76,5 +76,20 @@
      ###  "gotcha" keyword:
     * In Dart and Flutter, the this keyword is an implicit reference **pointing directly to the current instance**  of the class you are currently working inside
    # Part 4 : State Management
+* State management is just how we pass data around our app.
+* 1. Ephemeral State vs. App State
+     * Ephemeral State - local state - State that only one single widget cares about.
+     * App state - global state - State that multiple parts of your app need to share.
+* 2. The Problem: "Prop Drilling" - Passing that User object down to insufficient widgets 
+     * The Solution: InheritedWidget & Modern Tools
+          * Flutter has a built-in widget called InheritedWidget
+          * InheritedWidget sitting at the top of your tree - e.g., dark mode 
+          * InheritedWidget is hard to write from scratch. That is why the community uses packages:
+                  * Provider / Riverpod: These are basically wrappers around InheritedWidget that make it super easy to inject data at the top and listen to it at the bottom.
+                  * BLoC (Business Logic Component): The industry standard for enterprise apps. It uses Streams. The UI sends an Event (e.g., "LoginButtonPressed"), the BLoC does the math/API call, and spits out a new State (e.g., "LoginSuccessState"). Crucial concept: BLoC completely separates your UI design from your business logic.
+
+      
+            
+            
    
        
