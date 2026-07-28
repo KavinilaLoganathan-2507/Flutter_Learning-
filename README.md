@@ -16,7 +16,7 @@
 ## 2. Null Safety
  * By default, Dart does not allow variables to be null. This prevents the infamous "**Null Pointer Exception**" crashes.
 
- * If a variable might be null, you must explicitly tell Dart by adding a** question mark**(String? username;).
+ * If a variable might be null, you must explicitly tell Dart by adding a **question mark** (String? username;).
 
 * If you know a nullable variable has data at a specific moment, you use the **"bang"** operator to force it: username!.  **(username != null) **
 
@@ -25,9 +25,9 @@
 
 * When you do something asynchronous (like fetching a user profile from a server), Dart uses Future and async/await. It hands the task off and keeps painting the UI so the app doesn't freeze.
 
- * **The Catch:** If you run a massive CPU-heavy task—like parsing a giant JSON file or running a local ML model—it will block the main thread and freeze your UI, even if you use async.
+ * **The Catch:** If you run a massive CPU-heavy task-like parsing a giant JSON file or running a local ML model-it will block the main thread and freeze your UI, even if you use async.
 
-* **The Solution:** To do heavy processing without freezing the app, you must spawn a **separate thread**, which in Dart is called an **Isolat**e. Isolates do not share memory; they communicate by passing messages.
+* **The Solution:** To do heavy processing without freezing the app, you must spawn a **separate thread**, which in Dart is called an ** Isolate **. Isolates do not share memory; they communicate by passing messages.
 
 # Part 2: Flutter Under the Hood (The Three Trees)
 
@@ -60,3 +60,21 @@
  * initState(): Called exactly **once when the widget is born**. This is where you initialize variables, start animations, or open network connections.
  * build(): Called often. It runs after initState and **every single time setState() is called**.
  * dispose(): Called exactly once when the** widget is destroyed **(e.g., the user navigates away). This is crucial for **cleaning up memory**.
+
+## 2. Keys 
+ * Keys are how the Element Tree identifies specific widgets when they move around.
+    * 2 keys:
+       * 1. Local Key(4) :
+          * ValueKey<T>: **Identifies a widget using a simple value** like a string or integer
+          * ObjectKey: **Identifies a widget using a complex data object**. It checks if the object's fields match another object's fields to determine if they are identical.
+          * UniqueKey: Guarantees that the key is ** unique every single time it is evaluated **.** It forces a widget to reset its state upon every rebuild completely
+          * PageStorageKey: A specialized local key used to save scroll positions or tab states when a widget leaves the screen and returns later.
+      * 2. Global key(3) :
+           * GlobalKey<T>: The standard global key used to **maintain state across different screen hierarchies** or to call methods directly on a child widget's state via globalKey.currentState.
+           * LabeledGlobalKey: A debugging variant of a global key that allows you to attach a **human-readable text label** to make it easier to trace in your developer console.
+           * GlobalObjectKey: A specialized global key linked to a specific underlying data object, ensuring its global **uniqueness** matches that object instance.
+     ###  "gotcha" keyword:
+    * In Dart and Flutter, the this keyword is an implicit reference **pointing directly to the current instance**  of the class you are currently working inside
+   # Part 4 : State Management
+   
+       
