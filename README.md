@@ -88,8 +88,51 @@
                   * Provider / Riverpod: These are basically wrappers around InheritedWidget that make it super easy to inject data at the top and listen to it at the bottom.
                   * BLoC (Business Logic Component): The industry standard for enterprise apps. It uses Streams. The UI sends an Event (e.g., "LoginButtonPressed"), the BLoC does the math/API call, and spits out a new State (e.g., "LoginSuccessState"). Crucial concept: BLoC completely separates your UI design from your business logic.
 
+# Part 4 : Networking & Asynchronous Data
+* 1. API Calls (http vs dio)
+     
+| Feature | http Package | dio Package |
+| :--- | :--- | :--- |
+| **Publisher** | Officially maintained by the Dart Team | Third-party open-source package (cfug) |
+| **Philosophy** | Minimalist, lightweight, and low-level | Feature-rich, highly configurable, and developer-focused |
+| **Interceptors** | No native support (requires manual wrappers) | Built-in support for global request/response hooks |
+| **JSON Parsing** | Manual (requires jsonDecode) | Automatic (auto-converts JSON to Map or List) |
+| **Request Cancellation** | Not supported natively | Built-in (via CancelToken) |
+| **Timeout Configuration**| Manual handling required | Built-in (Connection, send, and receive timeouts) |
+| **File Progress Tracking** | Requires custom stream implementation | Built-in progress callbacks for uploads and downloads |
+| **Error Handling** | Basic (exposes raw responses or general errors) | Advanced (encapsulates detailed DioException states) |
+| **App Size Impact** | Negligible | Small |
+
+* 2. JSON Serialization
+
+    * When an API gives you data, it comes back as a raw JSON string. Because Dart is a **strongly-typed language**, dealing with raw dynamic JSON is dangerous-if you misspell a key (like json['usernme']), the app crashes at runtime.
+    * The standard practice: We create a "Model Class" (e.g., UserModel) and write a fromJson factory method. This converts the unpredictable JSON into a safe, predictable Dart object.
       
-            
+| Feature | Manual Serialization | Code Generation (json_serializable) | IDE Plugins / Generators |
+| :--- | :--- | :--- | :--- |
+| **Setup Overhead** | None (built into Dart standard library) | Medium (requires build_runner and packages) | None to Low (requires installing an extension) |
+| **Boilerplate Writing** | High (you must write `fromJson` and `toJson`) | Low (generated automatically via annotation) | Zero (generated instantly with one click) |
+| **Maintenance** | High (manual updates needed for any API change) | Low (run a command to regenerate files) | Medium (requires re-running the plugin manually) |
+| **Type Safety** | Low (prone to typos in string keys) | High (validated at compile time) | Medium (accurate at generation, prone to typos if edited) |
+| **Build Time Impact** | None | Increases build time during development | None |
+| **Ideal For** | Small payloads or hobby projects | Large, production-grade applications | Quick prototyping and medium-sized apps |
+
+      
+* 3. FutureBuilder & StreamBuilder
+      * FutureBuilder is a special widget that listens to an API call and gives you a snapshot of its current status
+  
+| Aspect | Manual State Management (setState) | FutureBuilder Widget |
+| :--- | :--- | :--- |
+| **Boilerplate Code** | High (requires StatefulWidget, initstate, and manual variables) | Low (can be used inside a Stateless外部/StatelessWidget) |
+| **State Tracking** | Manual variables needed (e.g., isLoading, errorMessage, data) | Automatic via the AsyncSnapshot object |
+| **Triggering Mechanism**| Requires manual function invocation (usually inside initState) | Automatically triggers when the assigned Future initializes |
+| **UI Rebuilds** | Explicitly forced via manual setState calls | Automatically rebuilds the UI based on connection state changes |
+| **Error Handling** | Requires manual try-catch blocks to update error states | Built-in via snapshot.hasError and snapshot.error |
+| **Code Separation** | Logic and UI layout are often tightly coupled | Separates the asynchronous source from the UI presentation layer |
+| **Memory Management** | Requires careful cleanup if the widget is disposed mid-request | Automatically manages structural lifecycles during rebuilds |
+
+
+# Part 5 : Performance, Architecture & Testing
             
    
        
