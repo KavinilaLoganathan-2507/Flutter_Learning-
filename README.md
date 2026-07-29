@@ -18,7 +18,7 @@
 
  * If a variable might be null, you must explicitly tell Dart by adding a **question mark** (String? username;).
 
-* If you know a nullable variable has data at a specific moment, you use the **"bang"** operator to force it: username!.  **(username != null) **
+* If you know a nullable variable has data at a specific moment, you use the **"bang"** operator to force it: username!.  **(username != null)**
 
 ## 3. Concurrency: Is Dart Single-Threaded?
 * Yes. Dart runs on a single thread using an Event Loop (very similar to JavaScript).
@@ -27,7 +27,7 @@
 
  * **The Catch:** If you run a massive CPU-heavy task-like parsing a giant JSON file or running a local ML model-it will block the main thread and freeze your UI, even if you use async.
 
-* **The Solution:** To do heavy processing without freezing the app, you must spawn a **separate thread**, which in Dart is called an ** Isolate **. Isolates do not share memory; they communicate by passing messages.
+* **The Solution:** To do heavy processing without freezing the app, you must spawn a **separate thread**, which in Dart is called an **Isolate**. Isolates do not share memory; they communicate by passing messages.
 
 # Part 2: Flutter Under the Hood (The Three Trees)
 
