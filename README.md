@@ -86,9 +86,12 @@
           * InheritedWidget sitting at the top of your tree - e.g., dark mode 
           * InheritedWidget is hard to write from scratch. That is why the community uses packages:
                   * Provider / Riverpod: These are basically wrappers around InheritedWidget that make it super easy to inject data at the top and listen to it at the bottom.
-                  * BLoC (Business Logic Component): The industry standard for enterprise apps. It uses Streams. The UI sends an Event (e.g., "LoginButtonPressed"), the BLoC does the math/API call, and spits out a new State (e.g., "LoginSuccessState"). Crucial concept: BLoC completely separates your UI design from your business logic.
+     * BLoC (Business Logic Component):
+       * The industry standard for enterprise apps. It uses Streams.
+       * The UI sends an Event (e.g., "LoginButtonPressed"), the BLoC does the math/API call, and spits out a new State (e.g., "LoginSuccessState").
+       * Crucial concept: BLoC completely separates your UI design from your business logic.
 
-# Part 4 : Networking & Asynchronous Data
+# Part 5: Networking & Asynchronous Data
 * 1. API Calls (http vs dio)
      
 | Feature | http Package | dio Package |
@@ -134,9 +137,30 @@
 | **Memory Management** | Requires careful cleanup if the widget is disposed mid-request | Automatically manages structural lifecycles during rebuilds |
 
 
-# Part 5: Performance, Architecture & Testing
+# Part 6: Performance, Architecture & Testing
 
-*
-            
+* 1. Performance Optimization
+      * The Power of const - If you put **const** in front of a widget (like const Text('Hello')), Flutter **builds it once and never rebuilds it again**, even if the parent widget calls setState(). It is the easiest way to **boost performance**.
+
+    ## ListView vs ListView.builder in Flutter
+
+| Feature | `ListView` | `ListView.builder` |
+| :--- | :--- | :--- |
+| **Loading Mechanism** | **Eager Evaluation** (Loads everything immediately) | **Lazy Loading** (Loads on-demand) |
+| **Rendering Behavior** | Draws all items at once (e.g., tries to render 1,000 items instantly) | Only renders items currently visible on the screen (e.g., 5 to 6 items) |
+| **Performance** | High risk of lag, frame drops, or app crashes with large datasets | Highly optimized, maintaining a smooth 60/120 FPS scrolling experience |
+| **Memory Footprint** | High (Scales linearly with the total number of items) | Low (Stays constant as it manages only visible items) |
+| **Widget Recycling** | Retains all elements in memory without efficient recycling | Recycles the widgets that go off-screen to display new incoming data |
+| **Best Use Case** | Small, static lists (e.g., a Settings menu or short form) | Large, dynamic, or infinite lists (e.g., social media feeds, product catalogs) |
+
+* 2. Architecture (Clean Architecture)
+      * 3 Layers:
+          * Data Layer -  Handles API calls, database queries, and JSON parsing.
+          * Domain Layer - Holds your Business Logic (BLoC) and Model classes. It doesn't know anything about the UI or the internet.
+          * Presentation Layer (UI) -  Your Flutter widgets. Remember the "dumb UI" rule! (stateless)
+* 3. Testing
+     * Unit Tests: Testing a single Dart function or class. - Returns correct value - Super Fast
+     * Widget Tests: Testing a single piece of UI in isolation. - Custom buttons
+     * Integration Tests: Testing the entire app end-to-end on a real emulator - slow but realistic 
    
        
