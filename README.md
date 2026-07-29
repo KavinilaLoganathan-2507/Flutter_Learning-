@@ -93,6 +93,7 @@
      
 | Feature | http Package | dio Package |
 | :--- | :--- | :--- |
+| **Define** | Standard Package | Handle complex (Production Apps) |
 | **Publisher** | Officially maintained by the Dart Team | Third-party open-source package (cfug) |
 | **Philosophy** | Minimalist, lightweight, and low-level | Feature-rich, highly configurable, and developer-focused |
 | **Interceptors** | No native support (requires manual wrappers) | Built-in support for global request/response hooks |
@@ -123,7 +124,8 @@
   
 | Aspect | Manual State Management (setState) | FutureBuilder Widget |
 | :--- | :--- | :--- |
-| **Boilerplate Code** | High (requires StatefulWidget, initstate, and manual variables) | Low (can be used inside a Stateless外部/StatelessWidget) |
+| **Define** | Initial (and future use) | Live(streaming) |
+| **Boilerplate Code** | High (requires StatefulWidget, initstate, and manual variables) | Low (can be used inside a Stateless/StatelessWidget) |
 | **State Tracking** | Manual variables needed (e.g., isLoading, errorMessage, data) | Automatic via the AsyncSnapshot object |
 | **Triggering Mechanism**| Requires manual function invocation (usually inside initState) | Automatically triggers when the assigned Future initializes |
 | **UI Rebuilds** | Explicitly forced via manual setState calls | Automatically rebuilds the UI based on connection state changes |
@@ -132,7 +134,9 @@
 | **Memory Management** | Requires careful cleanup if the widget is disposed mid-request | Automatically manages structural lifecycles during rebuilds |
 
 
-# Part 5 : Performance, Architecture & Testing
+# Part 5: Performance, Architecture & Testing
+
+*
             
    
        
