@@ -59,7 +59,7 @@
  ## 2. The Stateful Lifecycle
  * initState(): Called exactly **once when the widget is born**. This is where you initialize variables, start animations, or open network connections.
  * build(): Called often. It runs after initState and **every single time setState() is called**.
- * dispose(): Called exactly once when the** widget is destroyed **(e.g., the user navigates away). This is crucial for **cleaning up memory**.
+ * dispose(): Called exactly once when the** widget is destroyed (e.g., the user navigates away). This is crucial for **cleaning up memory**.
 
 ## 2. Keys 
  * Keys are how the Element Tree identifies specific widgets when they move around.
@@ -67,7 +67,7 @@
        * 1. Local Key(4) :
           * ValueKey<T>: **Identifies a widget using a simple value** like a string or integer
           * ObjectKey: **Identifies a widget using a complex data object**. It checks if the object's fields match another object's fields to determine if they are identical.
-          * UniqueKey: Guarantees that the key is ** unique every single time it is evaluated **.** It forces a widget to reset its state upon every rebuild completely
+          * UniqueKey: Guarantees that the key is **unique every single time it is evaluated** .It forces a widget to reset its state upon every rebuild completely
           * PageStorageKey: A specialized local key used to save scroll positions or tab states when a widget leaves the screen and returns later.
       * 2. Global key(3) :
            * GlobalKey<T>: The standard global key used to **maintain state across different screen hierarchies** or to call methods directly on a child widget's state via globalKey.currentState.
